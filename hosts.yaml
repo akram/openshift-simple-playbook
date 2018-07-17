@@ -1,0 +1,58 @@
+all:
+  children:
+    masters:
+      hosts:
+        @@ip: {}
+    etcd:
+      hosts:
+        @@ip: {}
+    nodes:
+      hosts:
+        @@ip: {}
+
+    OSEv3:
+      children:
+        etcd: {}
+        masters: {}
+        nodes: {}
+      vars:
+        debug_level: 2
+        ansible_ssh_user: root
+        openshift_deployment_type: origin
+        openshift_release: v3.9
+        openshift_master_api_port:     8443
+        openshift_master_console_port: 8443
+        openshift_hostname_check: false
+
+        openshift_metrics_install_metrics:  false
+        openshift_logging_install_logging:  false
+        openshift_hosted_prometheus_deploy: false
+        openshift_enable_service_catalog:   false
+        template_service_broker_install:    false
+
+        openshift_use_system_containers:          true
+        openshift_hosted_manage_registry:         true
+        openshift_hosted_manage_registry_console: true
+        openshift_hosted_manage_router:           true
+        openshift_install_examples:               true
+        openshift_examples_modify_imagestreams:   true
+        osm_use_cockpit:                          true
+        osm_cockpit_plugins:
+          - cockpit-kubernetes
+        openshift_master_audit_config:
+          enabled: true
+        openshift_master_identity_providers:
+          - challenge: true
+            login: true
+            mappingMethod: claim
+            name: htpassword
+            provider:
+              apiVersion: v1
+              kind: HTPasswdIdentityProvider
+              file: /var/lib/openshift/config/master/htpasswd
+          - challenge: 'true'
+            name:  allow_all
+            kind:  AllowAllPasswordIdentityProvider
+            login: 'true'
+        os_sdn_network_plugin_name: redhat/openshift-ovs-multitenant
+
