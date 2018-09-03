@@ -41,7 +41,7 @@
 
   - name: Download openshift CLI
     get_url:
-      url: https://github.com/openshift/origin/releases/download/v3.9.0/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit.tar.gz
+      url: https://github.com/openshift/origin/releases/download/v3.10.0/openshift-origin-client-tools-v3.10.0-dd10d17-linux-64bit.tar.gz
       dest: /tmp/origin.tgz
 
   - name: Extract openshift CLI
@@ -53,7 +53,7 @@
   - name: Copy files oc to /usr/local/bin
     copy:
       remote_src: True
-      src: /tmp/openshift-origin-client-tools-v3.9.0-191fece-linux-64bit/oc
+      src: /tmp/openshift-origin-client-tools-v3.10.0-dd10d17-linux-64bit/oc
       dest: /usr/local/bin/
 
   - name: Changing perm of "/usr/local/bin/oc", adding "+x"
