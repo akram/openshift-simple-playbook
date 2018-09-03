@@ -4,7 +4,7 @@ After=docker.service
 Requires=docker.service
 
 [Service]
-ExecStart=/usr/local/bin/oc cluster up --host-config-dir=/var/lib/openshift/config --host-data-dir=/var/lib/openshift/data --host-pv-dir=/var/lib/openshift/pv --host-volumes-dir=/var/lib/openshift/volumes --use-existing-config=true --public-hostname={{ public_hostname }} --routing-suffix={{ routing_suffix }} --loglevel=1 --metrics=true
+ExecStart=/usr/local/bin/oc cluster up --base-dir=/var/lib/openshift/ --write-config=false --loglevel=1 --public-hostname={{ public_hostname }} --routing-suffix={{ routing_suffix }}
 ExecStop=/usr/local/bin/oc cluster down
 WorkingDirectory=/var/lib/openshift
 Restart=no
