@@ -96,21 +96,22 @@
       password: 'admin'
       owner: root
       mode: 0640
-  - name: Set HTPasswdIdentityProvider
-    yedit:
-      src: /var/lib/openshift/openshift-apiserver/master-config.yaml
-      key: oauthConfig.identityProviders[0]
-      backup: true
-      value:
-        challenge: true
-        login: true
-        mappingMethod: claim
-        name: anypassword
-        provider:
-          apiVersion: v1
-          kind: HTPasswdPasswordIdentityProvider
-          file: /var/lib/openshift/openshift-apiserver/htpasswd
-    notify: Restart OpenShift
+  # oc cluster up with 3.10 does not support HTPassword
+#  - name: Set HTPasswdIdentityProvider
+#    yedit:
+#      src: /var/lib/openshift/openshift-apiserver/master-config.yaml
+#      key: oauthConfig.identityProviders[0]
+#      backup: true
+#      value:
+#        challenge: true
+#        login: true
+#        mappingMethod: claim
+#        name: anypassword
+#        provider:
+#          apiVersion: v1
+#          kind: HTPasswdPasswordIdentityProvider
+#          file: /var/lib/openshift/openshift-apiserver/htpasswd
+#    notify: Restart OpenShift
 
   handlers:
   - name: Restart OpenShift
