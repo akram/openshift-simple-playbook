@@ -1,5 +1,12 @@
 # Simple OpenShift Installation
 
+Install the required ansible-galaxy modules
+```
+ansible-galaxy install -r requirements.yaml
+
+```
+
+
 Get your IP address and your domain name and replace it in the following command lines:
 ```
 sed s/@@ip/$IP/g hosts.yaml > /tmp/hosts.yaml
